@@ -3,9 +3,9 @@ FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /source
 # Copy the project files into the container
 COPY . .
-# Grant execution rights and build the jar natively inside Docker
+# Grant execution rights and build the jar natively without the memory-hungry daemon
 RUN chmod +x gradlew
-RUN ./gradlew clean bootJar -x test
+RUN ./gradlew clean bootJar -x test --no-daemon -Dorg.gradle.jvmargs="-Xmx512m"
 
 # Stage 2: Create the lightweight production image
 FROM eclipse-temurin:17-jre
