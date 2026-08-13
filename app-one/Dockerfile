@@ -1,14 +1,18 @@
-# Use a lightweight Java 17 runtime image
+# Stage 1: Build the Spring Boot application
+FROM eclipse-temurin:17-jdk AS builder
+WORKDIR /source
+# Copy the project files into the container
+COPY . .
+# Grant execution rights and build the jar natively inside Docker
+RUN chmod +x gradlew
+RUN ./gradlew clean bootJar -x test
+
+# Stage 2: Create the lightweight production image
 FROM eclipse-temurin:17-jre
-
-# 1. Create and move into a working directory
 WORKDIR /app
-
-# 2. Copy the entire contents of the libs folder into /app
-COPY build/libs/ ./
-
-# Expose the port your Spring Boot app runs on
+# Pull the exact compiled jar from the builder stage
+COPY --from=builder /source/build/libs/app.jar app.jar
+# Expose the port
 EXPOSE 8080
-
-# 3. Let the Linux shell dynamically find and execute the JAR
-CMD ["sh", "-c", "java -jar *.jar"]
+# Start the application
+CMD ["java", "-jar", "app.jar"]
