@@ -13,6 +13,6 @@ WORKDIR /app
 # Pull the exact compiled jar from the builder stage
 COPY --from=builder /source/build/libs/app.jar app.jar
 # Expose the port
-EXPOSE 8080
+EXPOSE 8082
 # Start the application
 CMD ["java", "-jar", "app.jar"]
