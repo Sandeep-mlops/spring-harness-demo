@@ -19,6 +19,17 @@ service:
                   branch: main
               skipResourceVersioning: false
               enableDeclarativeRollback: false
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: SpringHarnessDocker
+                imagePath: <+pipeline.variables.dockerImage>
+                tag: <+pipeline.sequenceId>
+                digest: ""
+              identifier: springharnessartifact
+              type: DockerRegistry
   gitOpsEnabled: false
   orgIdentifier: default
   projectIdentifier: SpringHarness
