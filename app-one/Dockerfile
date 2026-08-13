@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copy the compiled jar file from the target directory
-COPY target/*.jar app.jar
+COPY build/libs/*.jar app.jar
 
 # Expose the port your Spring Boot app runs on
 EXPOSE 8080
