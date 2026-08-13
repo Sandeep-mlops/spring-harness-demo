@@ -17,6 +17,8 @@ service:
                   paths:
                     - <+pipeline.variables.appName>
                   branch: main
+              valuesPaths:
+                - <+pipeline.variables.appName>/values.yml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
       artifacts:
