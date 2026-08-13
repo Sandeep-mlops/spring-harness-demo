@@ -3,7 +3,22 @@ service:
   identifier: springharness
   serviceDefinition:
     type: Kubernetes
-    spec: {}
+    spec:
+      manifests:
+        - manifest:
+            identifier: springharnessmanifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: springharness
+                  gitFetchType: Branch
+                  paths:
+                    - <+pipeline.variables.appName>
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
   gitOpsEnabled: false
   orgIdentifier: default
   projectIdentifier: SpringHarness
