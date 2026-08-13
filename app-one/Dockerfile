@@ -1,14 +1,14 @@
 # Use a lightweight Java 17 runtime image
 FROM eclipse-temurin:17-jre
 
-# Set the working directory inside the container
+# 1. Create and move into a working directory
 WORKDIR /app
 
-# Copy the compiled jar file from the target directory
-COPY build/libs/app.jar app.jar
+# 2. Copy the entire contents of the libs folder into /app
+COPY build/libs/ ./
 
 # Expose the port your Spring Boot app runs on
 EXPOSE 8080
 
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# 3. Let the Linux shell dynamically find and execute the JAR
+CMD ["sh", "-c", "java -jar *.jar"]
