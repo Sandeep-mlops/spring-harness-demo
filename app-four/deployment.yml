@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-four-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-four
+  template:
+    metadata:
+      labels:
+        app: app-four
+    spec:
+      containers:
+      - name: app-four-container
+        image: {{.Values.imagePath}}
+        ports:
+        - containerPort: 8084
