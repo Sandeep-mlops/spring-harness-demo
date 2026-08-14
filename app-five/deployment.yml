@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-five-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-five
+  template:
+    metadata:
+      labels:
+        app: app-five
+    spec:
+      containers:
+      - name: app-five-container
+        image: {{.Values.imagePath}}
+        ports:
+        - containerPort: 8085
