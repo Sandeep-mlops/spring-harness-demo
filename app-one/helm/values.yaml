@@ -1,5 +1,5 @@
 image:
-  repository: "sandeep0803/app-two"
+  repository: "sandeep0803/app-one"
   tag: "latest" # Harness will dynamically override this at runtime
 
 service:
