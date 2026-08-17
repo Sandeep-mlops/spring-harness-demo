@@ -1,0 +1,8 @@
+image:
+  repository: "sandeep0803/app-three"
+  tag: "latest" # Harness will dynamically override this at runtime
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8083
